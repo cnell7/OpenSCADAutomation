@@ -15,17 +15,13 @@ for FILE in *.vtk;
 			subStr="${BASH_REMATCH[1]}"
 			subStr=${subStr:1}
 			echo $subStr
-			cd ..
-			/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -o "${saveDir}/${subStr}.stl" $openSCAD_file -D "input=\"$subStr\"" -D "length=\"7.5\""
 		elif [ "${FILE:0:4}" == "stx_" ]; then
 			pat="([^_]*)-([^-]*)"
 			[[ $FILE =~ $pat ]]	
 			subStr="${BASH_REMATCH[1]}"
 			echo $subStr
-			cd ..
-			/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -o "${saveDir}/${subStr}.stl" $openSCAD_file -D "input=\"$subStr\"" -D "length=12"
-			doneTags[\'${subStr}\']=1
-			echo ${doneTags[$subStr]}
 		fi
+		cd ..
+		/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -o "${saveDir}/${subStr}.stl" $openSCAD_file -D "input=\"$subStr\"" -D "length=12"
 		cd $nameTagInputDir
 	);done
